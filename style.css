@@ -31,15 +31,18 @@ body {
 
 .comment-section {
     background-color: #F2F2F2;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0px;
 }
 
 .comment {
-    margin: 16px;
+    margin: 8px 16px 8px 16px;
     background-color: hsla(0, 0%, 100%, 1);
     border-radius: 8px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .header {
@@ -91,5 +94,13 @@ button {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-    margin: 0px 16px 16px 39.026%;
+    margin: 0px 16px 16px 0px;
+}
+
+.reply {
+    max-width: 94.26%;
+    border-left: 2px;
+    border-style: solid;
+    border-color: hsla(224, 19%, 93%, 1);
+    align-self: end;
 }
