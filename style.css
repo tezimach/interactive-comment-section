@@ -1,0 +1,95 @@
+.font-header {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.font-paragraph {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: hsla(211, 10%, 45%, 1);
+}
+
+.text-color-dark-blue {
+    color: hsla(212, 24%, 26%, 1);
+}
+
+.text-color-light-grey-blue {
+    color: hsla(238, 57%, 85%, 1);
+}
+
+.text-color-moderate-blue {
+    color: hsla(238, 40%, 52%, 1);
+}
+
+body {
+    background-color: #F2F2F2;
+}
+
+.comment-section {
+    background-color: #F2F2F2;
+    height: 100%;
+}
+
+.comment {
+    margin: 16px;
+    background-color: hsla(0, 0%, 100%, 1);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    margin: 16px 8px 16px 16px;
+    width:32px
+}
+span {
+    margin: 8px;
+}
+
+p {
+    margin: 0 16px 16px 16px;
+}
+
+.score {
+    width: 100px;
+    height: 40px;
+    margin: 0px 0px 16px 16px;
+    background-color: hsla(228, 33%, 97%, 1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+input {
+    border:none;
+    all: unset;
+    width: 17px;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0px;
+  all: unset;
+}
+
+button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin: 0px 16px 16px 39.026%;
+}
