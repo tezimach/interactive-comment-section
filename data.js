@@ -82,9 +82,9 @@ for (let i=0; i<commentsArray.length; i++) {
   let comment = commentsArray[i];
   commentHTML += `<div id='${commentsArray[i].id}' class="comment">
   <div id="header" class="header">
-    <img src='${commentsArray[i].user.image.png}' alt="avatar" id="avatar" class="avatar">
-    <span class="font-header text-color-dark-blue">'${commentsArray[i].user.username}'</span>
-    <span class="font-paragraph">'${commentsArray[i].createdAt}'</span>
+    <img src=${commentsArray[i].user.image.png} alt="avatar" id="avatar" class="avatar">
+    <span class="font-header text-color-dark-blue">${commentsArray[i].user.username}</span>
+    <span class="font-paragraph">${commentsArray[i].createdAt}</span>
   </div>
   <p class="font-paragraph">${commentsArray[i].content}</p>
   <div class="score font-header">
