@@ -10,11 +10,22 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+}
+
+.text-color-light-greysh-blue {
     color: hsla(211, 10%, 45%, 1);
 }
 
 .text-color-dark-blue {
     color: hsla(212, 24%, 26%, 1);
+}
+
+.text-white {
+    color:hsla(0, 0%, 100%, 1);
+}
+
+.bg-blue {
+    background-color: hsla(238, 40%, 52%, 1);
 }
 
 .text-color-light-grey-blue {
@@ -103,4 +114,57 @@ button {
     border-style: solid;
     border-color: hsla(224, 19%, 93%, 1);
     align-self: end;
+}
+
+form {
+    margin: 8px 16px 32px 16px;
+    background-color: hsla(0, 0%, 100%, 1);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#form-input {
+    resize: none;
+    width: 100%;
+    min-height: 96px;
+    border: 1px solid #E9EBF0;
+    border-radius: 8px;
+    margin: 16px;
+    padding: 12px 24px;
+}
+
+::placeholder {
+    color: hsla(211, 10%, 45%, 1);
+}
+
+.you {
+    padding: 3px 6px;
+}
+
+.buttons {
+    margin: 0px 16px 16px 0px;
+    display: flex;
+}
+
+#edit {
+    margin: 0px;
+}
+
+#delete {
+    margin: 0px;
+    margin-right: 16px;
+    color: hsla(358, 79%, 66%, 1);
+}
+
+.send {
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+#your-avatar {
+    margin: 8px 8px 24px 16px;
 }
