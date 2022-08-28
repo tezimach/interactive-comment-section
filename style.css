@@ -86,7 +86,7 @@ p {
 input {
     border:none;
     all: unset;
-    width: 17px;
+    width: 30px;
     text-align: center;
 }
 
@@ -167,4 +167,12 @@ form {
 
 #your-avatar {
     margin: 8px 8px 24px 16px;
+}
+
+.increase {
+    cursor:pointer;
+}
+
+.decrease {
+    cursor:pointer;
 }

@@ -79,10 +79,10 @@ let data = {
         <span class="font-paragraph text-color-light-greysh-blue">${el.createdAt}</span>
       </div>
       <p class="font-paragraph text-color-light-greysh-blue">${el.content}</p>
-      <div class="score font-header">
-        <input class="text-color-light-grey-blue" type="button" value="+">
+      <div id="score" class="score font-header">
+        <input class="increase" class="text-color-light-grey-blue" type="button" value="+">
         <input class="text-color-moderate-blue" type="number" value='${el.score}' name="score" id="score">
-        <input class="text-color-light-grey-blue" type="button" value="-">
+        <input class="decrease" class="text-color-light-grey-blue" type="button" value="-">
       </div>
       <div class="buttons">
         <button type="button" id="delete">
@@ -108,10 +108,10 @@ let data = {
       <span class="font-paragraph text-color-light-greysh-blue">${el.createdAt}</span>
     </div>
     <p class="font-paragraph text-color-light-greysh-blue">${el.content}</p>
-    <div class="score font-header">
-      <input class="text-color-light-grey-blue" type="button" value="+">
+    <div id="score" class="score font-header">
+      <input class="increase" class="text-color-light-grey-blue" type="button" value="+">
       <input class="text-color-moderate-blue" type="number" value='${el.score}' name="score" id="score">
-      <input class="text-color-light-grey-blue" type="button" value="-">
+      <input class="decrease" class="text-color-light-grey-blue" type="button" value="-">
     </div>
     <button type="button">
       <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
@@ -158,6 +158,24 @@ const commentFunction = (array) => {
 
 commentFunction(commentsArray);
 
+//increase a score
+const addButtons = document.getElementsByClassName("increase");
+Array.from(addButtons).map((addScore)=>{
+  addScore.addEventListener("click",(event)=>{
+    let addButton = event.target;
+    let scoreBox = addButton.nextElementSibling;
+    scoreBox.value = parseInt(scoreBox.value) + 1;
+  });
+});
 
+//decrease a score
+const decreaseButtons = document.getElementsByClassName("decrease");
+Array.from(decreaseButtons).map((lowerScore)=>{
+  lowerScore.addEventListener("click",(event)=>{
+    let decreaseButton = event.target;
+    let scoreBox = decreaseButton.previousElementSibling;
+    scoreBox.value = parseInt(scoreBox.value) - 1;
+  });
+});
 
     
