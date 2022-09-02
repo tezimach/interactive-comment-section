@@ -72,64 +72,62 @@ let data = {
 // function that returns your comment's template literal
   let commentTemplateYou = (el) => {
       return`<div id='${el.id}' class="comment">
-      <div id="header" class="header">
-        <img src=${el.user.image.png} alt="avatar" id="avatar" class="avatar">
+      <div id='header-${el.id}' class="header">
+        <img src=${el.user.image.png} alt="avatar" id='avatar-${el.id}' class="avatar">
         <span class="font-header text-color-dark-blue">${el.user.username}</span>
         <span class="font-header text-white bg-blue you">you</span>
         <span class="font-paragraph text-color-light-greysh-blue">${el.createdAt}</span>
       </div>
-      <p class="font-paragraph text-color-light-greysh-blue">${el.content}</p>
-      <div id="score" class="score font-header">
+      <p id='p-${el.id}' class="font-paragraph text-color-light-greysh-blue">${el.content}</p>
+      <div id='score-${el.id}' class="score font-header">
         <input class="increase" class="text-color-light-grey-blue" type="button" value="+">
         <input class="text-color-moderate-blue" type="number" value='${el.score}' name="score" id="score">
         <input class="decrease" class="text-color-light-grey-blue" type="button" value="-">
       </div>
       <div class="buttons">
-        <button type="button" id="delete">
+        <button type="button" id='delete-${el.id}' class="delete">
           <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
           <span class="font-header">Delete</span>
         </button>
-        <button type="button" id="edit">
+        <button type="button" id='edit-${el.id}' class="edit">
           <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>
           <span class="font-header text-color-moderate-blue">Edit</span>
         </button>
       </div>
       </div>
-      <div id='reply ${el.id}' class="reply">
+      <div id='reply-${el.id}' class="reply">
     </div>`
   }
 
   // function that returns other's comment's template literal
   let commentTemplateOther = (el) => {
     return `<div id='${el.id}' class="comment">
-    <div id="header" class="header">
-      <img src=${el.user.image.png} alt="avatar" id="avatar" class="avatar">
+    <div id='header-${el.id}' class="header">
+      <img src=${el.user.image.png} alt="avatar" id='avatar-${el.id}' class="avatar">
       <span class="font-header text-color-dark-blue">${el.user.username}</span>
       <span class="font-paragraph text-color-light-greysh-blue">${el.createdAt}</span>
     </div>
     <p class="font-paragraph text-color-light-greysh-blue">${el.content}</p>
-    <div id="score" class="score font-header">
+    <div id='score-${el.id}' class="score font-header">
       <input class="increase" class="text-color-light-grey-blue" type="button" value="+">
       <input class="text-color-moderate-blue" type="number" value='${el.score}' name="score" id="score">
       <input class="decrease" class="text-color-light-grey-blue" type="button" value="-">
     </div>
-    <button type="button">
+    <button type="button" class="reply-button">
       <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
       <span class="font-header text-color-moderate-blue">Reply</span>
     </button>
     </div>
-    <div id='reply ${el.id}' class="reply">
+    <div id='reply-${el.id}' class="reply">
   </div>`
   }
 
 const commentsArray = data.comments;
 let commentHTML = "";
-let replyHTML = "";
 let commentSection = document.getElementById('comment-section');
 
-//function that runs through array and 
-//builds comments and replies based on it in html file
-//by template literal.
+
+//comment generator function
 const commentFunction = (array) => {
   for (let i=0; i<array.length; i++) {
     let comment = array[i];
@@ -137,26 +135,137 @@ const commentFunction = (array) => {
       commentHTML += commentTemplateYou(comment);
     }else {
       commentHTML += commentTemplateOther(comment);
-  commentSection.innerHTML = commentHTML;
     }
+      commentSection.innerHTML = commentHTML;
+  }
+}
 
-  //replies
-  let replies = document.getElementById(`reply ${comment.id}`);
-  const replyArray = comment.replies;
+commentFunction(commentsArray);
 
+//reply generator function
+const returnReplyArray = (el) => {
+  let replyArray = commentsArray[el].replies;
+  let replyDiv = document.getElementById(`reply-${el + 1}`);
+  let replyHTML = "";
   for (let i=0; i<replyArray.length; i++) {
     let reply = replyArray[i];
     if (reply.id == 4) {
       replyHTML += commentTemplateYou(reply);
     }else{
-    replyHTML += commentTemplateOther(reply);
+      replyHTML += commentTemplateOther(reply);
     }
-    replies.innerHTML = replyHTML;
+    replyDiv.innerHTML = replyHTML;
     }
   }
-}
 
-commentFunction(commentsArray);
+  returnReplyArray(1);
+
+let sendButton = document.getElementById("send");
+
+const replyButtons = document.getElementsByClassName("reply-button");
+Array.from(replyButtons).map((reply)=>{
+  reply.addEventListener("click",(event)=>{
+    let replyButton = event.target;
+    let parentComment = replyButton.parentNode.closest("div");
+    let userNameValue = parentComment.firstElementChild.firstElementChild.nextElementSibling.textContent;
+    let textArea = document.getElementById("form-input");
+    textArea.value = `@${userNameValue} `;
+    let end = textArea.value.length;
+    textArea.setSelectionRange(end, end);
+    textArea.focus();
+    textArea.scrollIntoView({behavior: "smooth"});
+
+    sendButton.addEventListener("click", (event)=>{
+      event.preventDefault();
+      newReplyTemplateFunction(parentComment,textArea.value);
+    });
+  });
+});
+
+
+let timeNow = (x) =>{setInterval(myTimer(x), 1000)};
+function myTimer(x) {
+  const date = new Date();
+  x.innerHTML = date.toLocaleTimeString();
+}
+console.log(timeNow);
+
+
+
+const newReplyTemplateFunction = (parent,text)=> {
+  let yourReply = commentsArray[1].replies[1];
+  let replySection = document.getElementById(`reply-${parent.id}`);
+  let comment = document.createElement("div");
+  comment.classList.add("comment");
+  replySection.appendChild(comment);
+  let header = document.createElement("div");
+  header.classList.add("header");
+  comment.appendChild(header);
+  let img = document.createElement("img");
+  img.classList.add("avatar");
+  img.setAttribute("src", `${yourReply.user.image.png}`);
+  img.setAttribute("alt", `avatar`);
+  header.appendChild(img);
+  let spanOne = document.createElement("span");
+  spanOne.classList.add("font-header");
+  spanOne.classList.add("text-color-dark-blue");
+  spanOne.textContent = yourReply.user.username;
+  header.appendChild(spanOne);
+  let spanTwo = document.createElement("span");
+  spanTwo.classList.add("font-header");
+  spanTwo.classList.add("text-white");
+  spanTwo.classList.add("bg-blue");
+  spanTwo.classList.add("you");
+  spanTwo.textContent = "you";
+  header.appendChild(spanTwo);
+  let spanThree = document.createElement("span");
+  spanThree.classList.add("font-paragraph");
+  spanThree.classList.add("text-color-light-greysh-blue");
+  header.appendChild(spanThree);
+  timeNow(spanThree);
+  let paragraph = document.createElement("p");
+  paragraph.classList.add(`font-paragraph`);
+  paragraph.classList.add(`text-color-light-greysh-blue`);
+  paragraph.textContent = text;
+  comment.appendChild(paragraph);
+  let score = document.createElement("div");
+  score.classList.add("score");
+  score.classList.add("font-header");
+  comment.appendChild(score);
+  let inputIncrease = document.createElement("input");
+  inputIncrease.classList.add("increase");
+  inputIncrease.classList.add("text-color-light-grey-blue");
+  inputIncrease.setAttribute("type", "button");
+  inputIncrease.setAttribute("value", "+");
+  score.appendChild(inputIncrease);
+  let inputScore = document.createElement("input");
+  inputScore.classList.add("text-color-moderate-blue");
+  inputScore.setAttribute("type", "number");
+  inputScore.setAttribute("value", 0);
+  inputScore.setAttribute("name", "score");
+  score.appendChild(inputScore);
+  let inputDecrease = document.createElement("input");
+  inputDecrease.classList.add("increase");
+  inputDecrease.classList.add("text-color-light-grey-blue");
+  inputDecrease.setAttribute("type", "button");
+  inputDecrease.setAttribute("value", "-");
+  score.appendChild(inputDecrease);
+  let buttons = document.createElement("div");
+  buttons.classList.add("buttons");
+  comment.appendChild(buttons);
+  let deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.setAttribute("type", "button");
+  buttons.appendChild(deleteButton);
+  deleteButton.innerHTML = `<svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
+  <span class="font-header">Delete</span>`;
+  let editButton = document.createElement("button");
+  editButton.classList.add("edit");
+  editButton.setAttribute("type", "button");
+  buttons.appendChild(editButton);
+  editButton.innerHTML = `<svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>
+  <span class="font-header text-color-moderate-blue">Edit</span>`
+}
 
 //increase a score
 const addButtons = document.getElementsByClassName("increase");
@@ -165,6 +274,7 @@ Array.from(addButtons).map((addScore)=>{
     let addButton = event.target;
     let scoreBox = addButton.nextElementSibling;
     scoreBox.value = parseInt(scoreBox.value) + 1;
+    addButton.classList.add("text-color-light-grey-blue");
   });
 });
 
@@ -175,7 +285,6 @@ Array.from(decreaseButtons).map((lowerScore)=>{
     let decreaseButton = event.target;
     let scoreBox = decreaseButton.previousElementSibling;
     scoreBox.value = parseInt(scoreBox.value) - 1;
+    decreaseButton.classList.add("text-color-light-grey-blue");
   });
 });
-
-    
