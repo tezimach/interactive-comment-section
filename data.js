@@ -182,6 +182,36 @@ Array.from(replyButtons).map((reply)=>{
   });
 });
 
+const deleteButtons = document.getElementsByClassName("delete");
+Array.from(deleteButtons).map((deleteButton)=>{
+  deleteButton.addEventListener("click",(event)=>{
+    let deleteButton = event.target;
+    let parentComment = deleteButton.parentNode.closest("div");
+    let userNameValue = parentComment.parentNode;
+    userNameValue.classList.add("hidden");
+  });
+});
+
+const editButtons = document.getElementsByClassName("edit");
+Array.from(editButtons).map((editButton)=>{
+  editButton.addEventListener("click",(event)=>{
+    let editButton = event.target;
+    let parentComment = editButton.parentNode.closest("div");
+    let paragraph = parentComment.parentNode.firstElementChild.nextElementSibling;
+    let textArea = document.getElementById("form-input");
+    let end = textArea.value.length;
+    textArea.setSelectionRange(end, end);
+    textArea.focus();
+    textArea.scrollIntoView({behavior: "smooth"});
+    sendButton.addEventListener("click", (event)=>{
+      event.preventDefault();
+      paragraph.textContent = textArea.value;
+    });
+    
+    console.log(paragraph);
+  });
+});
+
 
 let timeNow = (x) =>{setInterval(myTimer(x), 1000)};
 function myTimer(x) {
